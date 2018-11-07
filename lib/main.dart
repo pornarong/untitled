@@ -5,6 +5,8 @@ import 'package:untitled/home.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:untitled/models/app_state.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:untitled/services/oauth_service.dart';
+import 'dart:async';
 
 final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
@@ -20,7 +22,14 @@ class MyHttpOverrides extends HttpOverrides {
 void main() {
   HttpOverrides.global = new MyHttpOverrides();
   _firebaseMessaging.getToken().then((token) {
+    print("---------------------------------------------");
     print("token = " + token);
+    print("---------------------------------------------");
+    OAuthService().updateDeviceToken(token).then((result) {
+      print("---------------------------------------------");
+      print(result);
+      print("---------------------------------------------");
+    });
   });
   runApp(new MyApp());
 }

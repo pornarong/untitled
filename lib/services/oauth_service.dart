@@ -84,6 +84,25 @@ class OAuthService {
     return json.decode(result.body);
   }
 
+  Future<dynamic> updateDeviceToken(String token) async {
+    var client = await _getClient();
+
+    var requestRecord = {
+      "agentCode": username
+      , "deviceToken": token
+      , "os": "ANDROID"
+      , "application": "FOLLOW"
+    };
+    var body = _getRequestMessage(requestRecord);
+
+    var result = await client.post(
+        "$server/MDAWebService/api/user/updateDeviceToken",
+        headers: {"content-type": "application/json"},
+        body: json.encode(body));
+
+    return json.decode(result.body);
+  }
+
   Future<dynamic> receiveRecruitment(String refId) async {
     var client = await _getClient();
 
