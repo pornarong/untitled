@@ -46,9 +46,9 @@ class HomePageState extends State<HomePage> {
   @override
   void initState() {
     SharedPreferences.getInstance().then((prefs) {
-      String username = prefs.getString("username");
-      String password = prefs.getString("password");
-      String server = prefs.getString("server");
+      String username = prefs.getString("username") ?? "";
+      String password = prefs.getString("password") ?? "";
+      String server = prefs.getString("server") ?? "";
       if (username.isNotEmpty && password.isNotEmpty && server.isNotEmpty) {
         _selectedDrawerIndex = 1;
         AppState state = ScopedModel.of<AppState>(context);

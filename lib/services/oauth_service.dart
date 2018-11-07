@@ -46,7 +46,8 @@ class OAuthService {
     return {
       "headerData": {
         "messageId": "FL",
-        "sentDateTime": _getDateTime()
+        "sentDateTime": _getDateTime(),
+        "recordPerPage": 50
       },
       "requestRecord": requestRecord
     };
@@ -79,6 +80,7 @@ class OAuthService {
         headers: {"content-type": "application/json"},
         body: json.encode(body));
 
+    print(result.body);
     return json.decode(result.body);
   }
 
